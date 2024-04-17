@@ -10,10 +10,12 @@ dotenv.config({
 app.use(express.json());
 
 //routes
-import apiRoute from "./routes/api.js";
+import apiRoute, { apiProtector } from "./routes/api.js";
 import connectDB from "./db/index.js";
+import AuthMiddleware from "./middlewares/Auth.middleware.js";
 
 app.use('/api/v1/',apiRoute);
+app.use('/api/v1/',AuthMiddleware,apiProtector);
 
 connectDB()
 .then(()=>{
