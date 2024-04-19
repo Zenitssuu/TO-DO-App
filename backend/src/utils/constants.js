@@ -1,4 +1,4 @@
-export const DB_NAME = 'todo';
+export const DB_NAME = 'TodoApp';
 
 export const JWT_SECRET_TOKEN = "sapijcndhcbakjcba"
 

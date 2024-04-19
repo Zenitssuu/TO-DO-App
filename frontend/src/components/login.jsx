@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { login } from "../services/api.js";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import {toast, ToastContainer } from "react-toastify"
+
 
 function Login({ user, setUser }) {
   useEffect(() => {
     console.log(user);
-    if(user){
-      navigation('/');
+    if (user) {
+      navigation("/");
     }
   }, []);
-
 
   const [form, setForm] = useState({
     username: "",
     password: "",
   });
-
-  
 
   const [err, setErr] = useState(null);
 
@@ -44,6 +41,7 @@ function Login({ user, setUser }) {
       }
 
       if (result.data.status === 201) {
+        toast(result.data.message);
         setErr(result.data.data);
         return;
       }
@@ -58,7 +56,7 @@ function Login({ user, setUser }) {
   return (
     <>
       <div className="container">
-        <ToastContainer/>
+        <ToastContainer />
         <div className="row justify-content-center mt-4">
           <div className="col-lg-5 card border-primary mt-4 bg-light">
             <div className="card-header">Login</div>
@@ -79,7 +77,7 @@ function Login({ user, setUser }) {
                   placeholder="Enter email"
                 />
                 {err?.username && (
-                  <small id="emailHelp" className="form-text text-muted">
+                  <small id="emailHelp" className="form-text text-danger">
                     {err.username.msg}
                   </small>
                 )}
@@ -102,20 +100,22 @@ function Login({ user, setUser }) {
                   autoComplete="off"
                 />
                 {err?.password && (
-                  <small id="emailHelp" className="form-text text-muted">
+                  <small id="emailHelp" className="form-text text-danger">
                     {err.password.msg}
                   </small>
                 )}
               </div>
 
               {/* buttons */}
-              <button
-                type="button"
-                onClick={handleSubmit}
-                className="btn btn-primary btn-sm px-4"
-              >
-                Login
-              </button>
+              <div className="row justify-content-md-center form-group mt-4">
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  className="col-sm-6 btn btn-outline-secondary center"
+                >
+                  Login
+                </button>
+              </div>
             </div>
           </div>
         </div>
